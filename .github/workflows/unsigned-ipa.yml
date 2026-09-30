@@ -22,8 +22,8 @@ jobs:
         env:
           APP_GROUP: ${{ inputs.app_group }}
         run: |
-          grep -rl 'group\.com\.thebaselab\.code' --include='*.swift' --include='*.entitlements' . \
-            | xargs sed -i '' "s/group\.com\.thebaselab\.code/${APP_GROUP}/g"
+          grep -rlZ 'group\.com\.thebaselab\.code' --include='*.swift' --include='*.entitlements' . \
+            | xargs -0 sed -i '' "s/group\.com\.thebaselab\.code/${APP_GROUP}/g"
           ! grep -rn 'group\.com\.thebaselab\.code' --include='*.swift' --include='*.entitlements' .
 
       - name: Build
